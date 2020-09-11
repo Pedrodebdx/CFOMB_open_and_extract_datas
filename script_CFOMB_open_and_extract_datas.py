@@ -1,65 +1,37 @@
 import csv
 # read flash.dat to a list of lists
-datContent = open("GRPID215861116.dat").readlines()
-datContent = datContent[0]
+datContent = open("GRPID215723796.dat").readlines() # read file
+datContent = datContent[0] #open in one element of list > firt element in var
 
-code_banque = datContent[2:7]
-code_guichet = datContent[11:16]
-numero_de_compte = datContent[21:32]
-
-montant = datContent[90:103]
-
-rib = code_banque + code_guichet + numero_de_compte +zone_reservee
-
-montant = float(montant)
-montant
-
-celule01 = datContent[0:119]
-celule04 = datContent[120:239] 
-celule05 = datContent[240:360]
-celule07 = datContent[360:480]
-
-
-
-
-########################################################
-
-
-
-import csv
-# read flash.dat to a list of lists
-datContent = open("GRPID215861116.dat").readlines()
-datContent = datContent[0]
-
-longeur_fichier = int(len(datContent)/120)
+longeur_fichier = int(len(datContent)/120) #120 caracters in one record
 occurence = list(range(0, len(datContent), 120))
 
 
-list1=list(range(0,longeur_fichier,1))
+list1=list(range(0,longeur_fichier,1)) # make liste in function of specific file
 list2=[]
 for x in list1: 
-        result = (x * 120)-120
+        result = (x * 120)
         list2.append(result)
 
-list2.pop(0)
-occurence.pop(0)
+
+occurence.pop(0) 
+rajout_occurence = (occurence[-1]+120) #add one more occurence to add same len() and to get las record of file
+occurence.append((occurence[-1]+120))
 
 listedelignes=[]
-for i,j in zip(list2,occurence):
+for i,j in zip(list2,occurence): # build list of lines records
     line=datContent[i:j]    
     listedelignes.append(line)
 
-#############################################################
 
+code_banque = listedelignes[0][2:7]
+code_guichet = listedelignes[0][11:16]
+numero_de_compte = listedelignes[0][21:32]
 
-import csv
+montant_debut = float(listedelignes[0][90:103]) # get from firt line
+montant_fin = float(listedelignes[-1][90:103]) # get from last line
+rib = code_banque +' '+ code_guichet+' ' + numero_de_compte 
 
-datContent = open("GRPID215861116.dat").readlines()
-datContent[0].split('\n')
-
-
-filename = "GRPID215861116.dat"
-fileContents = open(filename,"r").read()
-f = open(filename,"w", newline="\n")
-f.write(fileContents)
-f.close()
+print(f'RIB: {rib}')
+print(f'Montant Début: {montant_debut}€')
+print(f'Monant fin: {montant_fin}€')
