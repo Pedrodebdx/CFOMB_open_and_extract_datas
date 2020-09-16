@@ -21,6 +21,7 @@ if datContent[0][-1] !='\n':
             list2.append(result)
 
 
+
     occurence.pop(0) 
     rajout_occurence = (occurence[-1]+120) #add one more occurence to add same len() and to get las record of file
     occurence.append((occurence[-1]+120))
