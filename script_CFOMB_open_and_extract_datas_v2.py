@@ -1,8 +1,8 @@
 import csv
-from cfonb import StatementReader
+from pythoncfonb import StatementReader
 import os
 
-file='4.dat' #choose your cfonb file
+file='2.dat' #choose your cfonb file
 statement_file = open(file)
 reader = StatementReader() #reader of library
 
