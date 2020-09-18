@@ -1,7 +1,7 @@
 import csv
 
 # read .dat 
-datContent = open("3.dat").readlines() # read file -> choise your file
+datContent = open("4.dat").readlines() # read file -> choise your file
 
 
 #traitement des fichiers sans retour chariot de fin de ligne
@@ -101,3 +101,12 @@ for line in listedelignes:
 # print des résultats
 for cle,valeur in a.items():
     print(cle, valeur)
+########################################
+
+liste_de_comptes = []
+for j in list(range(0,len(result))):
+    liste_de_comptes.append(result[j].header["account_nb"])
+
+print(len(liste_de_comptes))
+liste_de_comptes = set(liste_de_comptes)
+print(len(liste_de_comptes))
