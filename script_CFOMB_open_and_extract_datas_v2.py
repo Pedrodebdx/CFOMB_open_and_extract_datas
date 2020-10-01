@@ -2,7 +2,7 @@ import csv
 from cfonb import StatementReader
 import os
 
-def script(file='4.dat'): #choose your cfonb file
+def script(file='4.dat'): 
     
     statement_file = open(file)
     reader = StatementReader() #reader of library
@@ -41,9 +41,11 @@ def script(file='4.dat'): #choose your cfonb file
 
 
 from flask import *  
+from flask import Flask, flash, redirect, render_template, request, url_for
 app = Flask(__name__)  
 app.config['MAX_CONTENT-PATH'] = 99999999999
-app.config['UPLOAD_FOLDER'] = 'datas'
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
 
 @app.route('/')  
 def upload():  
@@ -51,11 +53,15 @@ def upload():
 
 @app.route('/success', methods = ['POST'])  
 def success():   
-    if request.method == 'POST':  
-        f = request.files['file']  
-        f.save(f.filename)
-        liste_sortie= script(file=f.filename)
-        os.remove(f.filename)  # delate file uploaded
-    return render_template("success4.html", name = f.filename, liste_sortie=liste_sortie)  
+    try:
+        if request.method == 'POST':  
+            f = request.files['file']  
+            f.save(f.filename)
+            liste_sortie= script(file=f.filename)
+            os.remove(f.filename)  # delate file uploaded
+        return render_template("success4.html", name = f.filename, liste_sortie=liste_sortie)
+    except:
+        return redirect(url_for('upload'))
+
 if __name__ == '__main__':
     app.run(debug = True) 
