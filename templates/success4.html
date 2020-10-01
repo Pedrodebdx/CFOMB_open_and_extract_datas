@@ -1,0 +1,18 @@
+<html>  
+ <head>  
+ <title>success</title>  
+ </head>  
+ <body>  
+ <p>Le fichier "{{name}}" à été correctement envoyé</p>  
+ <p>Résultat de l'extraction: </p>  
+ 
+  <p>{% for result in liste_sortie %}
+            <tr>
+                <td>{{ result }}<br></td>
+
+            </tr>
+{% endfor %}</p>
+ </body>   
+ 
+ <p> <a href= "{{ url_for("upload") }}">Pour faire une autre extracion cliquez ici</a></p>
+ </html>
