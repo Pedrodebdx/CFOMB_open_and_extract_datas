@@ -1,7 +1,10 @@
 import csv
 from cfonb import StatementReader
 import os
+from flask import *  
+from flask import Flask, flash, redirect, render_template, request, url_for
 
+## function allowing extraction
 def script(file='4.dat'): 
     
     statement_file = open(file)
@@ -38,13 +41,10 @@ def script(file='4.dat'):
     return liste_sortie
  
 
-
-
-from flask import *  
-from flask import Flask, flash, redirect, render_template, request, url_for
+## app flask
 app = Flask(__name__)  
 app.config['MAX_CONTENT-PATH'] = 99999999999
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+app.secret_key = b'_5#y2L"F4Q8zds2d9*xec]/'
 
 
 @app.route('/')  
