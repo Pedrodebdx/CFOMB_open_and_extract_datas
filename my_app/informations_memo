@@ -1,0 +1,8 @@
+#Création du docker:
+docker build --tag cfonb_extract_informations_docker .
+
+#lancer le docker pour tester:
+docker run -i -p 5000:5000 cfonb_extract_informations_docker:latest
+
+#pour déployer sur aws
+1- faire un zip de template + env + requirements.txt + __init__.py + Dockerfile

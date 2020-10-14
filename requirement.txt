@@ -1,4 +1,0 @@
-pip install python-cfonb
-pip install flask
-pip install requests
-
