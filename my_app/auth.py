@@ -97,7 +97,7 @@ def upload():
 def download():
 
     file_path = "resultat.csv"
-    resp = send_file(file_path)
+    resp = send_file(file_path,as_attachment=True,attachment_filename="resultat.csv")
     return resp
 
 

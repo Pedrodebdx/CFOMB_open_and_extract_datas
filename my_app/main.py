@@ -15,6 +15,25 @@ from flask_login import LoginManager
 main = Blueprint('main', __name__)
 
 
+ ## create csv, if user want to download it ###    
+def create_csv(liste_sortie):
+    '''
+    df = pd.DataFrame(liste_sortie)  
+    csv_data = df.to_csv(header=False)
+    df.to_csv('./project/resultat.csv', index=False) 
+  ''' 
+    print('debut creation csv')
+    import csv
+    with open("resultat.csv", "w") as myfile:
+        #print(myfile)
+        wr = csv.writer(myfile)
+        #print(liste_sortie)
+        for word in liste_sortie:
+            wr.writerow([word])
+        
+    print('fin creation csv')
+
+
 ## function allowing extraction
 def script(file='4.dat'): 
    
@@ -55,17 +74,11 @@ def script(file='4.dat'):
         ligne4 = ' '
         liste_sortie.append(ligne4)
      
-    ## create csv, if user want to download it ###    
-    '''
-    df = pd.DataFrame(liste_sortie)  
-    csv_data = df.to_csv(header=False)
-    df.to_csv('./project/resultat.csv', index=False) 
-    
-    with open("./projet/resultat.csv", "w") as f:
-        writer = csv.writer(f)
-        writer.writerows(liste_sortie)
-    
-'''
+    ## create csv, if user want to download it ###   
+    print('appel de la fonction CSV') 
+    create_csv(liste_sortie)
+    print('apres appel de la fonction CSV') 
+
     
     return liste_sortie
 
