@@ -26,8 +26,15 @@
                             
                             {% if current_user.is_authenticated %}
                             <a href="{{ url_for('main.profile') }}" class="navbar-item">
-                                Programme
+                                Extration de fichiers CFONB
                             </a>
+
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('main.ofx') }}" class="navbar-item">
+                                Transformation de fichiers OFX en CFONB
+                            </a>
+
+
                             {% endif %}
                             {% if not current_user.is_authenticated %}
                             <a href="{{ url_for('auth.login') }}" class="navbar-item">
@@ -50,6 +57,17 @@
 
         <div class="hero-body">
             <div class="container has-text-centered">
+
+        
+
+
+         <div class="logo">
+         <img src="{{ url_for('static', filename='./img/logo.png') }}" alt="logo"/>
+         </div>
+
+
+                
+
                {% block content %}
                {% endblock %}
             </div>

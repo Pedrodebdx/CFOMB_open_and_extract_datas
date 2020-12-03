@@ -7,8 +7,20 @@ from flask_login import login_user, logout_user, login_required
 from .models import User
 from . import db
 import os
+import datetime
+import random
+import string
+from flask_mail import Mail, Message # pour l'envoie du mdp par mail
+from . import create_app
 
 auth = Blueprint('auth', __name__)
+
+
+# mot de passe aleatoire 
+def get_random_string(length):
+    letters = string.ascii_lowercase
+    result_str = ''.join(random.choice(letters) for i in range(length))
+    return result_str
 
 @auth.route('/login')
 def login():
@@ -45,7 +57,7 @@ def signup_post():
         return redirect(url_for('auth.signup'))
     
     name = request.form.get('name')
-    password = request.form.get('password')
+    password = get_random_string(6)
 
     user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
 
@@ -60,7 +72,17 @@ def signup_post():
     # add the new user to the database
     db.session.add(new_user)
     db.session.commit()
+    
+    # sent message
+    mail = Mail(create_app()) 
+    body = "Merci de vous être enregistrer. Votre mot de passe pour vous connecté à l'application est "+password
+    recipients = []
+    recipients.append(email)
+    msg = Message(subject='Mot de passe application EXCO', sender = 'pierre-vincent.ferrat@exco.fr', recipients = recipients, body=body)
+    mail.connect()
+    mail.send(msg)
 
+    flash('Le mot de passe a été envoyé sur votre boite mail')
     return redirect(url_for('auth.login'))
 
 @auth.route('/logout')
@@ -91,7 +113,6 @@ def upload():
     return render_template("profile.html")      
 
 
-
 @auth.route('/download', methods=['GET', 'POST'])
 @login_required
 def download():
@@ -99,5 +120,4 @@ def download():
     file_path = "resultat.csv"
     resp = send_file(file_path,as_attachment=True,attachment_filename="resultat.csv")
     return resp
-
 

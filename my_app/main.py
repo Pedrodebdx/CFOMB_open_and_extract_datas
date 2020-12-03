@@ -92,6 +92,12 @@ def index():
 def profile():
     return render_template('profile.html', name=current_user.name)
 
+
+@main.route('/ofx')
+@login_required
+def ofx():
+    return render_template('profile.html', name=current_user.name)
+
   
 @main.route('/success', methods = ['POST'])
 @login_required  
