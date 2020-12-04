@@ -1,0 +1,17 @@
+<!-- templates/profile.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<h1 class="title">
+  Bienvenue {{ name }}, dans l'outils OFX to CFONB<br/><br/>
+
+
+ <form action = "/success" method = "post" enctype="multipart/form-data">   
+ <input type="file" name="file" />  
+ <input type = "submit" value="Obtenir le résultat">  
+ </form>  
+</h1>
+{% endblock %}

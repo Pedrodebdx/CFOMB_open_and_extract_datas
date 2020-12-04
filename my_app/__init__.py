@@ -25,12 +25,12 @@ def create_app():
     app.config['MAX_CONTENT-PATH'] = 99999999999
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
     
-    app.config['MAIL_SERVER']='smtp.office365.com'               # pour l'envoie du mdp par mail
+    app.config['MAIL_SERVER']='in-v3.mailjet.com'               # pour l'envoie du mdp par mail
     app.config['MAIL_USE_TLS'] = True                             # pour l'envoie du mdp par mail
     app.config['MAIL_USE_SSL'] = False                             # pour l'envoie du mdp par mail    
-    app.config['MAIL_PORT'] = 25                             # pour l'envoie du mdp par mail    
-    app.config['MAIL_USERNAME'] = 'pierre-vincent.ferrat@exco.fr'     # pour l'envoie du mdp par mail
-    app.config['MAIL_PASSWORD'] = 'Exco1pass!'               # pour l'envoie du mdp par mail
+    app.config['MAIL_PORT'] = 587                             # pour l'envoie du mdp par mail    
+    app.config['MAIL_USERNAME'] = '5ce64276af71ebd22072019c9755c1b6'     # pour l'envoie du mdp par mail
+    app.config['MAIL_PASSWORD'] = '5311adeb111cd76993db1f632479eeb6'               # pour l'envoie du mdp par mail
     mail = Mail(app)                                        # pour l'envoie du mdp par mail
     
     

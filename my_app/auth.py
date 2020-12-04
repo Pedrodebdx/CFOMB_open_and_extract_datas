@@ -75,10 +75,10 @@ def signup_post():
     
     # sent message
     mail = Mail(create_app()) 
-    body = "Merci de vous être enregistrer. Votre mot de passe pour vous connecté à l'application est "+password
+    body = "Merci de vous être enregistré. Votre mot de passe pour vous connecter à l'application est "+password
     recipients = []
     recipients.append(email)
-    msg = Message(subject='Mot de passe application EXCO', sender = 'pierre-vincent.ferrat@exco.fr', recipients = recipients, body=body)
+    msg = Message(subject='Mot de passe application EXCO', sender = 'digital@myexco.fr', recipients = recipients, body=body)
     mail.connect()
     mail.send(msg)
 

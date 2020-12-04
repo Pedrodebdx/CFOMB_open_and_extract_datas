@@ -27,9 +27,7 @@
                             {% if current_user.is_authenticated %}
                             <a href="{{ url_for('main.profile') }}" class="navbar-item">
                                 Extration de fichiers CFONB
-                            </a>
 
-                            {% if current_user.is_authenticated %}
                             <a href="{{ url_for('main.ofx') }}" class="navbar-item">
                                 Transformation de fichiers OFX en CFONB
                             </a>
