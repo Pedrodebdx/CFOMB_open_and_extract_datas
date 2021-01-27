@@ -10,9 +10,9 @@ docker run -i -p 5000:5000 cfonb_extract_informations_docker:latest
 
 
 lancement de l'environnement
-(env_app_flask) (base) ubuntu@ubuntu-portable:~/Documents/EXCO/plateforme_flask ---> source env_app_flask/bin/activate
+(env_app_flask) (base) ubuntu@ubuntu-portable:~/Documents/EXCO/plateforme_flask/my_app ---> source env_app_flask/bin/activate
 
-export FLASK_APP=my_app
+export FLASK_APP=.
 export FLASK_DEBUG=1
 flask run
 

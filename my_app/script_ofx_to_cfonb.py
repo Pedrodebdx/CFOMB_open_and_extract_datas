@@ -1,4 +1,5 @@
 from datetime import datetime
+
 from cfonb_modifiee.writer.common import write, date_format, save, BR_LINE
 from cfonb_modifiee.writer.statement import Statement
 from ofxtools.Parser import OFXTree
@@ -74,7 +75,7 @@ def write_cfonb_from_ofx(txs,acct,stmts):
 
     ###  écriture en 04 et 05 ###
     for i in range(0,len(txs)): #len TXS pour le nbre de transactions
-        print(txs[i])
+        #print(txs[i])
         statement.add(  acct.bankid,                    #bank code
                         'RLV ',                         #operation_code
                         acct.branchid,                  #agency_code
@@ -95,18 +96,19 @@ def write_cfonb_from_ofx(txs,acct,stmts):
                                 debit_ou_credit(txs[i].trntype),#interbank_code
                                 stmts[0].banktranlist.dtstart,  #date
                                 txs[i].memo)                    #comment
-
+    print('écriture en 04 et 05') 
 
     ###  écriture en 07(footer) -> statement ###
     statement.footer(acct.bankid,acct.branchid,stmts[0].curdef,acct.acctid, stmts[0].banktranlist.dtend , stmts[0].availbal.balamt)
+    print('écriture en 07(footer)')    
+
 
     # enregistrement du fichier
-    statement.render(filename='./ofx-to-cfonb.cfonb')    
+    statement.render(filename='../datas/fichier_converti.cfonb')    
+    print('enregistrement du fichier cfonb dans datas')    
     
-    
-    
-txs,acct,stmts = read_ofx(file = "./datas/3.ofx")
+#txs,acct,stmts = read_ofx(file = "./datas/3.ofx")
 
-write_cfonb_from_ofx(txs,acct,stmts)
+#write_cfonb_from_ofx(txs,acct,stmts)
 
 

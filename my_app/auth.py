@@ -12,6 +12,7 @@ import random
 import string
 from flask_mail import Mail, Message # pour l'envoie du mdp par mail
 from . import create_app
+import script_ofx_to_cfonb
 
 auth = Blueprint('auth', __name__)
 
@@ -90,7 +91,7 @@ def signup_post():
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
-
+'''
 @auth.route('/success')
 @login_required
 def success():   
@@ -106,7 +107,8 @@ def success():
 
     except:
         return redirect(url_for('auth.upload'))
-    
+'''    
+
 @auth.route('/upload')  
 @login_required
 def upload():  
@@ -117,7 +119,33 @@ def upload():
 @login_required
 def download():
 
-    file_path = "resultat.csv"
+    file_path = "../datas/resultat_extrait_cfonb.csv"
     resp = send_file(file_path,as_attachment=True,attachment_filename="resultat.csv")
     return resp
 
+############################# Ofx to cfonb ############################
+@auth.route('/ofx')
+@login_required
+def ofx():
+    return render_template('ofx.html')
+
+
+@auth.route('/transform_ofx_to_cfonb', methods=['GET', 'POST'])
+@login_required
+def transform_ofx_to_cfonb():
+    try:
+        if request.method == 'POST':  
+            f = request.files['file']  
+            f.save(f.filename)
+            file=f.filename
+
+            txs,acct,stmts = script_ofx_to_cfonb.read_ofx(file = file) #fonction 1 du script
+            script_ofx_to_cfonb.write_cfonb_from_ofx(txs,acct,stmts)   #fonction 2 du script
+
+            file_path = "../datas/fichier_converti.cfonb"
+            resp = send_file(file_path,as_attachment=True,attachment_filename="fichier_converti.cfonb")  # renvoi du fichier sur la meme page
+            return resp     
+
+
+    except:
+        return redirect(url_for('auth.ofx'))    

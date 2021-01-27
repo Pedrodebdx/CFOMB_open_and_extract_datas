@@ -17,14 +17,9 @@ main = Blueprint('main', __name__)
 
  ## create csv, if user want to download it ###    
 def create_csv(liste_sortie):
-    '''
-    df = pd.DataFrame(liste_sortie)  
-    csv_data = df.to_csv(header=False)
-    df.to_csv('./project/resultat.csv', index=False) 
-  ''' 
     print('debut creation csv')
     import csv
-    with open("resultat.csv", "w") as myfile:
+    with open("datas/resultat_extrait_cfonb.csv", "w") as myfile:
         #print(myfile)
         wr = csv.writer(myfile)
         #print(liste_sortie)
@@ -43,8 +38,7 @@ def script(file='4.dat'):
     except:
         pass    
     ##########################################    
-    
-    
+        
     statement_file = open(file)
     reader = StatementReader() #reader of library
 
@@ -91,12 +85,6 @@ def index():
 @login_required
 def profile():
     return render_template('profile.html', name=current_user.name)
-
-
-@main.route('/ofx')
-@login_required
-def ofx():
-    return render_template('ofx.html', name=current_user.name)
 
   
 @main.route('/success', methods = ['POST'])
