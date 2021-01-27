@@ -24,7 +24,7 @@ def create_app():
     app.config['SECRET_KEY'] = '9OLWxND4o83j4K4iuopO'
     app.config['MAX_CONTENT-PATH'] = 99999999999
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
-    
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
     app.config['MAIL_SERVER']='in-v3.mailjet.com'               # pour l'envoie du mdp par mail
     app.config['MAIL_USE_TLS'] = True                             # pour l'envoie du mdp par mail
     app.config['MAIL_USE_SSL'] = False                             # pour l'envoie du mdp par mail    
