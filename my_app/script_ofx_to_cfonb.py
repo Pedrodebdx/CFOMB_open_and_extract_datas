@@ -1,8 +1,13 @@
 from datetime import datetime
-
-from cfonb_modifiee.writer.common import write, date_format, save, BR_LINE
-from cfonb_modifiee.writer.statement import Statement
+#from cfonb_modifiee.writer.common import write, date_format, save, BR_LINE
+#from cfonb_modifiee.writer.statement import Statement
 from ofxtools.Parser import OFXTree
+from .cfonb_modifiee.writer.common import write, date_format, save, BR_LINE
+from .cfonb_modifiee.writer.statement import Statement
+
+
+
+
 
 ############# Lire fichier OFX ########
 def read_ofx(file):
@@ -104,7 +109,7 @@ def write_cfonb_from_ofx(txs,acct,stmts):
 
 
     # enregistrement du fichier
-    statement.render(filename='../datas/fichier_converti.cfonb')    
+    statement.render(filename='./datas/fichier_converti.cfonb')    
     print('enregistrement du fichier cfonb dans datas')    
     
 #txs,acct,stmts = read_ofx(file = "./datas/3.ofx")
